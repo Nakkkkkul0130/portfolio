@@ -12,9 +12,9 @@ const achievements = [
   },
   {
     id: 2,
-    title: '150+ Problems Solved on LeetCode',
+    title: '280+ Problems Solved on LeetCode',
     date: '2025',
-    description: 'Surpassed milestone of solving 150+ LeetCode questions, significantly improving problem-solving skills.',
+    description: 'Surpassed milestone of solving 280+ LeetCode questions, significantly improving problem-solving skills.',
     icon: <Award size={24} />
   }
 ];
@@ -85,7 +85,7 @@ const Achievements = () => {
                 <div className="text-gray-600">Projects Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 mb-2">150+</div>
+                <div className="text-3xl font-bold text-primary-600 mb-2">280+</div>
                 <div className="text-gray-600">DSA Question Solved</div>
               </div>
               <div className="text-center">
