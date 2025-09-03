@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Github, FileText, MapPin, ArrowUp } from 'lucide-react';
 import { Link } from 'react-scroll';
-import cv from '../assets/nakul updated cv1.pdf';
+import cv from '../assets/nakul_resume1.pdf';
 
 const Footer = () => {
   return (

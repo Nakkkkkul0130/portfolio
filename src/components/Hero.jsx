@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, FileDown, Linkedin, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-scroll';
 import myPhoto from '../assets/1745233364098.jpg';
-import cv from '../assets/nakul updated cv1.pdf';
+import cv from '../assets/nakul_resume1.pdf';
 
 const Hero = () => {
   return (
