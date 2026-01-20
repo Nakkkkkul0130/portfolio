@@ -1,197 +1,157 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Linkedin, Github, FileText, MapPin, ArrowUp } from 'lucide-react';
-import { Link } from 'react-scroll';
-import cv from '../assets/nakul_resume1.pdf';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const socialLinks = [
+    { 
+      href: "https://github.com/Nakkkkkul0130", 
+      label: "GitHub", 
+      icon: "🐙",
+      color: "from-gray-700 to-gray-900"
+    },
+    { 
+      href: "https://linkedin.com/in/nakul-bhar0130", 
+      label: "LinkedIn", 
+      icon: "💼",
+      color: "from-blue-600 to-blue-800"
+    },
+    { 
+      href: "mailto:nakkul.dev@gmail.com", 
+      label: "Email", 
+      icon: "📧",
+      color: "from-red-500 to-orange-500"
+    },
+    { 
+      href: "https://twitter.com/nakulbhar001", 
+      label: "Twitter", 
+      icon: "🐦",
+      color: "from-sky-400 to-blue-500"
+    }
+  ];
+
+  const quickLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/skills", label: "Skills" },
+    { href: "/projects", label: "Projects" },
+    { href: "/education", label: "Education" },
+    { href: "/achievements", label: "Achievements" },
+    { href: "/certificates", label: "Certificates" },
+    { href: "/contact", label: "Contact" }
+  ];
+
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div>
-            <motion.h3
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent"
-            >
-              Nakul Bhar
-            </motion.h3>
-            <motion.p
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-gray-300 mb-6"
-            >
-              Full-Stack Developer specializing in building exceptional digital experiences and solutions.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex space-x-4"
-            >
-              <a 
-                href="https://github.com/Nakkkkkul0130" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Github size={20} />
-              </a>
-              <a 
-                href="https://linkedin.com/in/nakul-bhar0130" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a 
-                href="mailto:nakulbhar7308@gmail.com"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Mail size={20} />
-              </a>
-            </motion.div>
-          </div>
-
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-lg font-semibold mb-6 text-white"
-            >
-              Quick Links
-            </motion.h4>
-            <motion.ul
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="space-y-3"
-            >
-              {['Home', 'About', 'Skills', 'Projects', 'Certificates', 'Achievements', 'Training'].map((item) => (
-                <li key={item}>
-                  <Link
-                    to={item.toLowerCase()}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={500}
-                    className="text-gray-400 hover:text-white transition-colors cursor-pointer"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-lg font-semibold mb-6 text-white"
-            >
-              Contact Information
-            </motion.h4>
-            <motion.ul
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="space-y-4"
-            >
-              <li className="flex items-start gap-3 text-gray-400">
-                <Phone size={18} className="shrink-0 mt-0.5" />
-                <span>+91 9728647308</span>
-              </li>
-              <li className="flex items-start gap-3 text-gray-400">
-                <Mail size={18} className="shrink-0 mt-0.5" />
-                <span>nakulbhar7308@gmail.com</span>
-              </li>
-              <li className="flex items-start gap-3 text-gray-400">
-                <MapPin size={18} className="shrink-0 mt-0.5" />
-                <span>Lovely Professional University, Punjab, India</span>
-              </li>
-            </motion.ul>
-          </div>
-
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-lg font-semibold mb-6 text-white"
-            >
-              Resume
-            </motion.h4>
-            <motion.p
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-gray-400 mb-6"
-            >
-              Download my resume to learn more about my experience, education, and skills.
-            </motion.p>
-            <motion.a
-              href={cv}
-              download
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-2.5 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <FileText size={18} />
-              Download CV
-            </motion.a>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-gray-400 text-sm"
-          >
-            © {new Date().getFullYear()} Nakul Bhar. All rights reserved.
-          </motion.p>
-          
+    <footer className="relative bg-black/40 backdrop-blur-xl border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-3 gap-12 mb-8">
+          {/* Brand Section */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-4 md:mt-0"
+            transition={{ duration: 0.6 }}
           >
-            <Link
-              to="hero"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={800}
-              className="inline-flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full cursor-pointer hover:bg-primary-600 transition-colors"
-            >
-              <ArrowUp size={18} />
-            </Link>
+            <h3 className="text-2xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                Nakul Bhar
+              </span>
+            </h3>
+            <p className="text-gray-400 mb-4">
+              ✨ Crafting digital experiences with passion and precision ✨
+            </p>
+            <p className="text-gray-400 mb-4">
+              💫 Turning ideas into reality, one line of code at a time 💫
+            </p>
+            <p className="text-gray-500 text-sm">
+              📍 Rohtak,Haryana, India
+            </p>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h4 className="text-xl font-bold text-white mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              {quickLinks.map((link, index) => (
+                <motion.li 
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
+                >
+                  <Link 
+                    to={link.href}
+                    className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 inline-block"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h4 className="text-xl font-bold text-white mb-4">Connect With Me</h4>
+            <div className="grid grid-cols-2 gap-4">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? "_blank" : undefined}
+                  rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                  className={`bg-gradient-to-r ${link.color} p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform duration-300`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <span className="text-2xl">{link.icon}</span>
+                  <span className="text-white font-semibold text-sm">{link.label}</span>
+                </motion.a>
+              ))}
+            </div>
           </motion.div>
         </div>
+
+        {/* Divider */}
+        <motion.div 
+          className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mb-8"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        />
+
+        {/* Bottom Section */}
+        <motion.div 
+          className="flex flex-col md:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Nakul Bhar. All rights reserved.
+          </p>
+          <div className="flex flex-col md:flex-row items-center gap-2">
+            <p className="text-gray-500 text-sm">
+              Made with ❤️ & ☕ by Nakul
+            </p>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );

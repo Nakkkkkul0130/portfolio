@@ -1,137 +1,270 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, FileDown, Linkedin, Mail, Phone } from 'lucide-react';
-import { Link } from 'react-scroll';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import myPhoto from '../assets/1745233364098.jpg';
-import cv from '../assets/nakul_resume1.pdf';
+import cv from '../assets/nakkul_resume.pdf';
 
 const Hero = () => {
-  return (
-    <section id="hero" className="pt-28 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const texts = [
+    'Full Stack Developer',
+    'AI & Cloud Enthusiast',
+    'Competitive Programmer',
+    'Problem Solver'
+  ];
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const current = texts[currentIndex];
       
-      <div className="absolute top-0 right-0 -z-10 opacity-20 w-1/2 h-1/2 bg-gradient-radial from-primary-300 to-transparent rounded-full blur-3xl dark:from-primary-700"></div>
-      <div className="absolute bottom-0 left-0 -z-10 opacity-20 w-1/3 h-1/3 bg-gradient-radial from-secondary-300 to-transparent rounded-full blur-3xl dark:from-secondary-700"></div>
+      if (!isDeleting) {
+        setCurrentText(current.substring(0, currentText.length + 1));
+        
+        if (currentText === current) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        setCurrentText(current.substring(0, currentText.length - 1));
+        
+        if (currentText === '') {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % texts.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
 
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-2/3">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentIndex, texts]);
+
+  const textVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.8,
+        ease: "backOut"
+      }
+    }
+  };
+
+  const name = "Nakul Bhar";
+
+  return (
+    <section id="hero" className="min-h-screen flex items-center justify-center relative pt-20">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <motion.div
+          className="text-center lg:text-left space-y-8"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.2
+              }
+            }
+          }}
+        >
+          <motion.div className="space-y-4">
+            <motion.span 
+              className="text-2xl lg:text-3xl font-light text-gray-300 block"
+              variants={textVariants}
             >
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 font-display">
-                <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent dark:from-primary-400 dark:to-secondary-400">
-                  Welcome to My Portfolio!
-                </span>
-              </h1>
-              <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-6">
-                Full-Stack Developer
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                Hi, I'm Nakul, a B.Tech Computer Science student at Lovely Professional University, 
-                specializing in Full-Stack Development. I focus on building scalable applications and 
-                have a solid foundation in both front-end and back-end development. I am committed to 
-                continuously improving my skills in emerging technologies.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <motion.a
-                  href={cv}
-                  download
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all dark:from-primary-500 dark:to-primary-600"
+              Hi, I'm
+            </motion.span>
+            
+            <div className="flex flex-wrap justify-center lg:justify-start gap-1">
+              {name.split('').map((letter, index) => (
+                <motion.span
+                  key={index}
+                  className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-pink-400 via-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent inline-block"
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.8,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  whileHover={{
+                    scale: 1.2,
+                    rotateY: 15,
+                    textShadow: "0 0 30px rgba(168, 85, 247, 0.8)",
+                    transition: { duration: 0.3 }
+                  }}
+                  style={{
+                    backgroundSize: '400% 400%',
+                    animation: `gradient 4s ease infinite ${index * 0.2}s`
+                  }}
                 >
-                  <FileDown size={20} />
-                  Download CV
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/in/nakul-bhar0130"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center gap-2 bg-white text-primary-600 border border-primary-600 px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all dark:bg-transparent dark:text-primary-400 dark:border-primary-400"
-                >
-                  <Linkedin size={20} />
-                  Connect on LinkedIn
-                </motion.a>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <motion.a
-                  href="tel:+919728647308"
-                  whileHover={{ y: -5 }}
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors dark:text-gray-400 dark:hover:text-primary-400"
-                >
-                  <Phone size={18} />
-                  <span>+91 9728647308</span>
-                </motion.a>
-                <motion.a
-                  href="mailto:nakulbhar7308@gmail.com"
-                  whileHover={{ y: -5 }}
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors dark:text-gray-400 dark:hover:text-primary-400"
-                >
-                  <Mail size={18} />
-                  <span>nakulbhar7308@gmail.com</span>
-                </motion.a>
-                <motion.a
-                  href="https://github.com/Nakkkkkul0130"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -5 }}
-                  className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors dark:text-gray-400 dark:hover:text-primary-400"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                  <span>github.com/Nakkkkkul0130</span>
-                </motion.a>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div 
-            className="md:w-1/3 mt-10 md:mt-0"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="relative">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full mx-auto overflow-hidden border-4 border-white dark:border-gray-700 shadow-xl transition-all"
-              >
-                <img 
-                  src={myPhoto} 
-                  alt="Nakul Bhar" 
-                  className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-110"
-                />
-              </motion.div>
+                  {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
+              ))}
             </div>
           </motion.div>
-        </div>
-
-        <motion.div 
-          className="flex justify-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <Link
-            to="about"
-            spy={true}
-            smooth={true}
-            offset={-80}
-            duration={500}
-            className="animate-bounce bg-white dark:bg-gray-800 p-3 rounded-full shadow-md cursor-pointer text-primary-600 dark:text-primary-400"
+          
+          <motion.div
+            className="space-y-6"
+            variants={textVariants}
           >
-            <ArrowDown size={24} />
-          </Link>
+            <motion.div className="h-16 flex items-center justify-center lg:justify-start">
+              <span className="text-2xl lg:text-4xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                {currentText}
+                <motion.span
+                  className="inline-block w-1 h-8 lg:h-10 bg-gradient-to-b from-purple-400 to-pink-400 ml-1"
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
+              </span>
+            </motion.div>
+          </motion.div>
+          
+          <motion.p 
+            className="text-lg text-gray-300 max-w-2xl leading-relaxed"
+            variants={textVariants}
+          >
+            <strong>Full Stack Developer</strong> specializing in <strong>MERN Stack</strong> with expertise in 
+            <strong>AI Integration (OpenAI API)</strong>, <strong>Cloud Deployment</strong>, and <strong>Data Structures & Algorithms</strong>. 
+            Active on <strong>LeetCode</strong> solving DSA problems. Building scalable solutions with modern technologies.
+          </motion.p>
+          
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4"
+            variants={textVariants}
+          >
+            <motion.a 
+              href={cv} 
+              download 
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl overflow-hidden"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
+              <motion.div
+                className="absolute inset-0 bg-white/20"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.6 }}
+              />
+              <span className="relative z-10">Download Resume</span>
+            </motion.a>
+            
+            <motion.a 
+              href="https://linkedin.com/in/nakul-bhar0130" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-bold rounded-2xl overflow-hidden backdrop-blur-sm"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20"
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">Let's Connect</span>
+            </motion.a>
+          </motion.div>
+        </motion.div>
+        
+        <motion.div 
+          className="flex justify-center lg:justify-end"
+          initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, type: "spring" }}
+        >
+          <motion.div 
+            className="relative group"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            {/* Single Animated Ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-purple-400/30"
+              style={{
+                width: '120%',
+                height: '120%',
+                top: '-10%',
+                left: '-10%'
+              }}
+              animate={{
+                rotate: [0, 360]
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <motion.div 
+              className="absolute -inset-8 bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 rounded-full blur-2xl opacity-30 group-hover:opacity-50"
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <motion.img 
+              src={myPhoto} 
+              alt="Nakul Bhar" 
+              className="w-80 h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-white/20 relative z-10 shadow-2xl"
+              animate={{
+                y: [0, -20, 0]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
         </motion.div>
       </div>
+      
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <div className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center backdrop-blur-sm bg-white/5">
+          <motion.div 
+            className="w-1.5 h-4 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full mt-3"
+            animate={{ y: [0, 16, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
+      
+      <style jsx>{`
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+      `}</style>
     </section>
   );
 };

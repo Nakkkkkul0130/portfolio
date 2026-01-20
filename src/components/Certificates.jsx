@@ -1,106 +1,104 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ExternalLink } from 'lucide-react';
-
-const certificates = [
-  {
-    id: 1,
-    title: 'JAVA Certification',
-    issuer: 'HackerRank',
-    date: "January 2025",
-    image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg',
-    link: 'https://www.hackerrank.com/certificates/iframe/054ad3443508'
-  },
-  {
-    id: 2,
-    title: 'Building Web Applications in PHP',
-    issuer: 'Coursera',
-    date: "December 2024",
-    image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg',
-    link: 'https://coursera.org/share/dedad0e96440adceab9c6d6fd2ea692b'
-  },
-  {
-    id: 3,
-    title: 'Data Structure and Algorithm',
-    issuer: 'Udemy',
-    date: "March 2023",
-    image: 'https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg',
-    link: 'https://www.udemy.com/certificate/UC-665b2777-c830-48a8-806a-fc12e5eca714/'
-  },
-  {
-    id: 4,
-    title: 'Python Basics',
-    issuer: 'HackerRank',
-    date: "March 2023",
-    image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg',
-    link: 'https://www.hackerrank.com/certificates/iframe/abd6f1a52a6a'
-  }
-];
+// Import certificate images
+import ibmCert from '../assets/ibm.png';
+import gokboruCert from '../assets/summert.png';
+import courseraCert from '../assets/htmlcssjss.png';
+import udemyCert from '../assets/dss.png';
 
 const Certificates = () => {
+  const certificates = [
+    {
+      title: "JavaScript Programming Essentials",
+      issuer: "IBM",
+      date: "Sep 2025",
+      image: ibmCert,
+      link: "https://coursera.org/share/730810c21f0e98a8614b74eac7a46f36"
+    },
+    {
+      title: "Summer Training Certificate in Frontend Development with Reactjs",
+      issuer: "Gokboru Tech",
+      date: "July 2024",
+      image: gokboruCert,
+      link: "https://your-certificate-link.com"
+    },
+    {
+      title: "Html, Css, Javascript for Web Developers",
+      issuer: "Coursera",
+      date: "May 2024",
+      image: courseraCert,
+      link: "https://coursera.org/share/0ef9eebe5735d37873d930d4edda6d33"
+    },
+    {
+      title: "Data Structure and Algorithm",
+      issuer: "Udemy",
+      date: "Sep 2023",
+      image: udemyCert,
+      link: "https://www.udemy.com/certificate/UC-665b2777-c830-48a8-806a-fc12e5eca714/"
+    }
+  ];
+
   return (
-    <section id="certificates" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="certificates" className="py-20">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.8 }}
         >
-          
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Award size={32} className="text-primary-600" />
-            <h2 className="text-3xl md:text-4xl font-bold font-display">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <span className="text-white font-extrabold">My </span>
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent font-extrabold">
               Certificates
-            </h2>
-          </div>
-
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-
-          <p className="text-gray-600 mt-6 max-w-3xl mx-auto">
-            I'm committed to continuous learning. Here are some of the certifications I've earned
-            to enhance my skills.
-          </p>
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full" />
         </motion.div>
 
-        <div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {certificates.map((cert) => (
-              <motion.div
-                key={cert.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * cert.id }}
-                className="bg-white rounded-lg overflow-hidden shadow-card group"
-              >
-                <div className="relative h-36 overflow-hidden">
-                  <img 
-                    src={cert.image} 
-                    alt={cert.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute top-0 right-0 bg-primary-600 text-white text-xs py-1 px-3 rounded-bl-lg">
-                    {cert.date}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h4 className="font-semibold text-gray-800 mb-1">{cert.title}</h4>
-                  <p className="text-gray-600 text-sm mb-3">Issued by {cert.issuer}</p>
+        <div className="grid md:grid-cols-2 gap-8">
+          {certificates.map((cert, index) => (
+            <motion.div
+              key={index}
+              className="bg-white/5 border border-white/20 rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+            >
+              {/* Certificate Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={cert.image} 
+                  alt={cert.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              </div>
+              
+              {/* Certificate Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-white mb-2">{cert.title}</h3>
+                <p className="text-blue-400 font-medium mb-4">{cert.issuer}</p>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400 text-sm bg-white/10 px-3 py-1 rounded-lg">
+                    📅 {cert.date}
+                  </span>
                   <a 
                     href={cert.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-primary-600 text-sm hover:text-primary-700 transition-colors"
+                    className="text-cyan-400 hover:text-cyan-300 font-semibold text-sm transition-colors"
                   >
-                    View Certificate
-                    <ExternalLink size={14} className="ml-1" />
+                    View Certificate →
                   </a>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

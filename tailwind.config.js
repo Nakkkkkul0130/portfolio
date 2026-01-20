@@ -55,6 +55,12 @@ export default {
       },
       boxShadow: {
         card: '0 0 20px rgba(0, 0, 0, 0.05)',
+        'card-hover': '0 20px 40px rgba(0, 0, 0, 0.1)',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'gradient': 'gradient-shift 3s ease infinite',
       },
     },
   },

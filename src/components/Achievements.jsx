@@ -1,99 +1,129 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Trophy } from 'lucide-react';
-
-const achievements = [
-  {
-    id: 1,
-    title: 'Ethical Hacking Certification',
-    date: '2024',
-    description: 'Received certification in Ethical Hacking from NPTEL, strengthening cybersecurity knowledge.',
-    icon: <Trophy size={24} />
-  },
-  {
-    id: 2,
-    title: '280+ Problems Solved on LeetCode',
-    date: '2025',
-    description: 'Surpassed milestone of solving 280+ LeetCode questions, significantly improving problem-solving skills.',
-    icon: <Award size={24} />
-  }
-];
 
 const Achievements = () => {
+  const achievements = [
+    {
+      title: "LeetCode Problem Solver",
+      description: "Adeptly resolved 350+ problems on LeetCode platform",
+      icon: "💻",
+      color: "from-yellow-400 to-orange-500",
+      link: "https://leetcode.com/u/nakul_bhar0130/"
+    },
+    {
+      title: "Full-Stack Developer",
+      description: "Deployed production-ready full stack application with modern tech stacks",
+      icon: "🚀",
+      color: "from-blue-500 to-purple-600"
+    },
+    {
+      title: "Dean's List Achievement",
+      description: "Ranked among the top 10% of students (Dean's List) in my university batch",
+      icon: "🎓",
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      title: "Hackathon Winner",
+      description: "Secured 2nd position in Integrtr Hackathon by designing the frontend UI, awarded Amazon voucher worth 5000 INR",
+      icon: "🏆",
+      color: "from-pink-500 to-rose-600"
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        type: "spring"
+      }
+    }
+  };
+
   return (
-    <section id="achievements" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="achievements" className="py-20 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">
-            My <span className="text-primary-600">Achievements</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-          <p className="text-gray-600 mt-6 max-w-3xl mx-auto">
-            Some notable achievements and recognitions I've received throughout my academic and professional journey.
-          </p>
+          <motion.h2 
+            className="text-4xl lg:text-5xl font-bold mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-white font-extrabold">My </span>
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent font-extrabold">
+              Achievements
+            </span>
+          </motion.h2>
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div 
+          className="flex flex-col space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {achievements.map((achievement, index) => (
             <motion.div
-              key={achievement.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-lg overflow-hidden shadow-card hover:shadow-lg transition duration-300"
+              key={index}
+              className={`flex items-center gap-8 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}
+              variants={cardVariants}
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="p-6 flex gap-4">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
-                    {achievement.icon}
-                  </div>
+              {/* Achievement Icon/Image */}
+              <div className="w-24 h-24 flex-shrink-0">
+                <div className={`w-full h-full bg-gradient-to-r ${achievement.color} rounded-2xl flex items-center justify-center shadow-lg`}>
+                  <span className="text-4xl">{achievement.icon}</span>
                 </div>
-                <div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
-                    <h3 className="text-xl font-semibold text-gray-800">{achievement.title}</h3>
-                    <span className="text-sm text-gray-500">{achievement.date}</span>
-                  </div>
-                  <p className="text-gray-600">{achievement.description}</p>
-                </div>
+              </div>
+              
+              {/* Achievement Content */}
+              <div className="flex-1 bg-white/5 backdrop-blur-xl border border-white/20 p-6 rounded-2xl">
+                <h3 className="text-2xl font-bold text-white mb-3">{achievement.title}</h3>
+                <p className="text-gray-300 leading-relaxed mb-4">{achievement.description}</p>
+                {achievement.link && (
+                  <a
+                    href={achievement.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
+                  >
+                    View Profile →
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 bg-white rounded-lg shadow-card overflow-hidden"
-        >
-          <div className="p-8 text-center bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-            <h3 className="text-2xl font-semibold mb-2">Continuous Growth & Learning</h3>
-            <p>I believe in constantly improving and expanding my skillset to stay ahead in this ever-evolving tech landscape.</p>
-          </div>
-          <div className="p-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 mb-2">10+</div>
-                <div className="text-gray-600">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 mb-2">280+</div>
-                <div className="text-gray-600">DSA Question Solved</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 mb-2">2+</div>
-                <div className="text-gray-600">Years of Learning</div>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
