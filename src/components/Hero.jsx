@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import myPhoto from '../assets/1745233364098.jpg';
+import myPhoto from '../assets/photos.jpeg';
 import cv from '../assets/nakkul_resume.pdf';
 
 const Hero = () => {
